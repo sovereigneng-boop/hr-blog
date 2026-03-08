@@ -1,7 +1,9 @@
 import PostCard from "../components/PostCard";
-import { posts } from "../lib/posts";
+import { getAllPosts } from "../lib/posts";
 
 export default function HomePage() {
+  const posts = getAllPosts();
+
   return (
     <div className="space-y-8">
       <section className="space-y-4">
