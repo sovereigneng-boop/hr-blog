@@ -8,6 +8,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="gQAcQN2IG0tzzhNTfqkjIp2nfram8i-u06Sce4uq7bA"
+        />
+      </head>
       <body className="bg-white text-slate-900">
         <div className="min-h-screen flex flex-col">
           <header className="border-b bg-brand-600 text-white shadow-sm">
