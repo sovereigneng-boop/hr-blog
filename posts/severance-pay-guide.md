@@ -1,9 +1,9 @@
 ---
 title: "퇴직금 정산 가이드: 평균임금 계산과 실무 체크리스트"
 date: "2026-02-20"
-category: "퇴직금"
+category: "급여(연봉) 및 수당"
 summary: "퇴직금의 기본 개념부터 평균임금 산정, 자주 발생하는 실수까지 HR 관점에서 정리했습니다."
-readingTime: "8분"
+thumbnail: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80"
 ---
 
 퇴직금은 퇴직 근로자의 생활 안정을 위한 제도로, HR 실무에서 오류가 발생하기 쉬운 영역 중 하나입니다.

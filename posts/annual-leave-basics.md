@@ -1,9 +1,9 @@
 ---
 title: "연차휴가 완전 정리: 발생 기준부터 관리 팁까지"
 date: "2026-03-01"
-category: "연차"
+category: "휴가(연차) 및 휴직"
 summary: "연차휴가 발생 기준, 사용 촉진 제도, 관리 시 놓치기 쉬운 컴플라이언스 포인트를 정리했습니다."
-readingTime: "7분"
+thumbnail: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80"
 ---
 
 연차휴가는 근로자에게 보장된 가장 기본적인 휴식 제도입니다. 하지만 실제 현장에서는 발생 기준과 사용 촉진, 미사용 수당 정산 등에서 다양한 이슈가 발생합니다.

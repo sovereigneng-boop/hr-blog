@@ -1,9 +1,9 @@
 ---
 title: "4대보험 한 번에 이해하기: 가입부터 변경·상실 신고까지"
 date: "2026-02-05"
-category: "4대보험"
+category: "인사 및 노무 상식"
 summary: "국민연금, 건강보험, 고용보험, 산재보험의 기본 개념과 HR이 챙겨야 할 실무 포인트를 정리했습니다."
-readingTime: "10분"
+thumbnail: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80"
 ---
 
 4대보험은 모든 기업이 반드시 관리해야 하는 기본 인사·노무 영역입니다. 하지만 각 보험별로 기관과 규정이 달라 헷갈리기 쉽습니다.
