@@ -1,7 +1,5 @@
 import "./globals.css";
-import { Suspense } from "react";
 import ThemeToggle from "../components/ThemeToggle";
-import SearchBox from "../components/SearchBox";
 import TopNav from "../components/TopNav";
 
 export const metadata = {
@@ -35,7 +33,7 @@ export default function RootLayout({ children }) {
           <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0A2540] shadow-sm">
             <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
               <div className="flex flex-col gap-1">
-                <span className="text-2xl font-semibold tracking-tight text-white">
+                <span className="site-title tracking-tight text-white">
                   직장인 권리 설명서
                 </span>
                 <span className="hidden max-w-3xl text-sm text-white/80 sm:inline">
@@ -51,26 +49,10 @@ export default function RootLayout({ children }) {
           <TopNav />
 
           <main className="mx-auto flex-1 w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-            <div className="grid gap-8 md:grid-cols-[1fr_minmax(160px,18%)]">
-              <div className="space-y-8 md:hidden">
-                <Suspense fallback={<div className="h-[76px]" />}>
-                  <SearchBox />
-                </Suspense>
+            <div className="min-w-0">
+              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-slate-800 dark:bg-slate-950">
+                {children}
               </div>
-
-              <div className="min-w-0">
-                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-slate-800 dark:bg-slate-950">
-                  {children}
-                </div>
-              </div>
-
-              <aside className="hidden md:block">
-                <div className="sticky top-[7.25rem] rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950">
-                  <Suspense fallback={<div className="h-[76px]" />}>
-                    <SearchBox />
-                  </Suspense>
-                </div>
-              </aside>
             </div>
           </main>
 

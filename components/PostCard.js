@@ -1,16 +1,18 @@
 import Link from "next/link";
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, variant = "default" }) {
   const thumbnail =
     post.thumbnail ||
     "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
 
+  const isImageOnly = variant === "imageOnly";
+
   return (
     <article className="card-hover">
       <Link href={`/posts/${post.slug}`} className="group block">
-        <div className="aspect-square overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
-          <div className="grid h-full grid-rows-[2fr_1fr]">
-            <div className="relative overflow-hidden bg-slate-100 dark:bg-slate-900">
+        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
+          <div className={isImageOnly ? "h-full" : "grid h-full grid-rows-[2fr_1fr]"}>
+            <div className="relative h-52 sm:h-60 md:h-64 overflow-hidden bg-slate-100 dark:bg-slate-900">
               <img
                 src={thumbnail}
                 alt=""
@@ -19,11 +21,13 @@ export default function PostCard({ post }) {
               />
             </div>
 
-            <div className="flex items-center p-4">
-              <h2 className="line-clamp-2 text-sm font-semibold leading-snug text-slate-900 group-hover:text-brand-700 dark:text-slate-50 dark:group-hover:text-brand-300">
-                {post.title}
-              </h2>
-            </div>
+            {!isImageOnly && (
+              <div className="flex items-center p-4">
+                <h2 className="line-clamp-2 text-sm font-semibold leading-snug text-slate-900 group-hover:text-brand-700 dark:text-slate-50 dark:group-hover:text-brand-300">
+                  {post.title}
+                </h2>
+              </div>
+            )}
           </div>
         </div>
       </Link>

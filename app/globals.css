@@ -2,14 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "ELAND Nice M";
+  src: url("/fonts/ELAND 나이스 M.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ELAND Choice B";
+  src: url("/fonts/ELAND 초이스 B.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ELAND Choice L";
+  src: url("/fonts/ELAND 초이스 L.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: "ELAND Choice L", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+.site-title {
+  font-family: "ELAND Nice M", system-ui, sans-serif;
+  font-size: 3.4rem;
+  font-weight: normal;
+  line-height: 1.1;
+}
+
 h1,
-h2,
+h2 {
+  font-family: "ELAND Choice B", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
 h3,
 h4 {
   letter-spacing: -0.01em;
