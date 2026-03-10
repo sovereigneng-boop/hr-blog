@@ -1,8 +1,8 @@
 import "./globals.css";
 import { Suspense } from "react";
 import ThemeToggle from "../components/ThemeToggle";
-import CategorySidebar from "../components/CategorySidebar";
 import SearchBox from "../components/SearchBox";
+import TopNav from "../components/TopNav";
 
 export const metadata = {
   title: "직장인 권리 설명서",
@@ -32,13 +32,13 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <div className="min-h-screen flex flex-col">
-          <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
+          <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0A2540] shadow-sm">
             <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
               <div className="flex flex-col gap-1">
-                <span className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
+                <span className="text-2xl font-semibold tracking-tight text-white">
                   직장인 권리 설명서
                 </span>
-                <span className="hidden max-w-3xl text-sm text-slate-600 sm:inline dark:text-slate-300">
+                <span className="hidden max-w-3xl text-sm text-white/80 sm:inline">
                   근로기준법(노동법), 연차(휴가), 연봉협상, 근로조건 등 직장인이라면 꼭 알아야 할 권리를 현직 인사 담당자가 가장 쉽게 알려드립니다
                 </span>
               </div>
@@ -48,20 +48,15 @@ export default function RootLayout({ children }) {
             </div>
           </header>
 
+          <TopNav />
+
           <main className="mx-auto flex-1 w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-            <div className="grid gap-8 md:grid-cols-[15%_70%_15%]">
+            <div className="grid gap-8 md:grid-cols-[1fr_minmax(160px,18%)]">
               <div className="space-y-8 md:hidden">
                 <Suspense fallback={<div className="h-[76px]" />}>
                   <SearchBox />
                 </Suspense>
-                <CategorySidebar />
               </div>
-
-              <aside className="hidden md:block">
-                <div className="sticky top-24 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950">
-                  <CategorySidebar />
-                </div>
-              </aside>
 
               <div className="min-w-0">
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-slate-800 dark:bg-slate-950">
@@ -70,7 +65,7 @@ export default function RootLayout({ children }) {
               </div>
 
               <aside className="hidden md:block">
-                <div className="sticky top-24 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+                <div className="sticky top-[7.25rem] rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950">
                   <Suspense fallback={<div className="h-[76px]" />}>
                     <SearchBox />
                   </Suspense>
