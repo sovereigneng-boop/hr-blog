@@ -11,11 +11,11 @@ export async function generateMetadata({ params }) {
   const post = await getPostBySlug(params.slug);
   if (!post) {
     return {
-      title: "글을 찾을 수 없습니다 - 직장인 권리 설명서"
+      title: "글을 찾을 수 없습니다 - 인사3분"
     };
   }
   return {
-    title: `${post.title} - 직장인 권리 설명서`,
+    title: `${post.title} - 인사3분`,
     description: post.summary
   };
 }

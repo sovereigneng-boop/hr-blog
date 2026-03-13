@@ -9,12 +9,12 @@ export function generateMetadata({ searchParams }) {
   const q = (searchParams?.q ?? "").toString().trim();
   if (!q) {
     return {
-      title: "검색 - 직장인 권리 설명서",
+      title: "검색 - 인사3분",
       description: "블로그 글을 검색해보세요."
     };
   }
   return {
-    title: `"${q}" 검색 결과 - 직장인 권리 설명서`,
+    title: `"${q}" 검색 결과 - 인사3분`,
     description: `"${q}"에 대한 검색 결과입니다.`
   };
 }

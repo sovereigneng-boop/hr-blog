@@ -3,8 +3,8 @@ import ThemeToggle from "../components/ThemeToggle";
 import TopNav from "../components/TopNav";
 
 export const metadata = {
-  title: "직장인 권리 설명서",
-  description: "근로기준법(노동법), 연차(휴가), 연봉협상, 근로조건 등 직장인이라면 꼭 알아야 할 권리를 현직 인사 담당자가 가장 쉽게 알려드립니다"
+  title: "인사3분",
+  description: "바쁜 직장인들의 시간을 낭비하지 않겠습니다! 노동법, 연차 휴가, 복리후생, 연봉협상 등 직장인이라면 알아야 할 권리를 3분 내로 핵심만 설명합니다."
 };
 
 const themeInitScript = `
@@ -34,10 +34,12 @@ export default function RootLayout({ children }) {
             <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
               <div className="flex flex-col gap-1">
                 <span className="site-title tracking-tight text-white">
-                  직장인 권리 설명서
+                  인사3분
                 </span>
-                <span className="hidden max-w-3xl text-sm text-white/80 sm:inline">
-                  근로기준법(노동법), 연차(휴가), 연봉협상, 근로조건 등 직장인이라면 꼭 알아야 할 권리를 현직 인사 담당자가 가장 쉽게 알려드립니다
+                <span className="hidden max-w-3xl whitespace-pre-line text-base text-white/80 sm:inline">
+                  {`바쁜 직장인들의 시간을 낭비하지 않겠습니다!
+노동법, 연차 휴가, 복리후생, 연봉협상 등 직장인이라면 알아야 할 '권리'
+모두 '3분'내로 핵심 내용만 설명하겠습니다!`}
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -58,7 +60,7 @@ export default function RootLayout({ children }) {
 
           <footer className="border-t border-slate-200/70 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
             <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-slate-500 sm:px-6 lg:px-8 dark:text-slate-400">
-              © {new Date().getFullYear()} 직장인 권리 설명서. All rights reserved.
+              © {new Date().getFullYear()} 인사3분. All rights reserved.
             </div>
           </footer>
         </div>

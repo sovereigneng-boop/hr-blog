@@ -10,10 +10,10 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const category = getCategoryBySlug(params.slug);
   if (!category) {
-    return { title: "카테고리를 찾을 수 없습니다 - 직장인 권리 설명서" };
+    return { title: "카테고리를 찾을 수 없습니다 - 인사3분" };
   }
   return {
-    title: `${category.label} - 직장인 권리 설명서`,
+    title: `${category.label} - 인사3분`,
     description: `${category.label} 카테고리의 최신 글을 모아보세요.`
   };
 }

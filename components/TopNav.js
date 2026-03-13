@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CATEGORIES } from "../lib/categories";
@@ -9,6 +10,15 @@ const NAV_ITEMS = [
   { href: "/", label: "Home" },
   ...CATEGORIES.map((c) => ({ href: `/category/${c.slug}`, label: c.label }))
 ];
+
+function SearchBoxFallback() {
+  return (
+    <div className="flex items-center gap-2">
+      <div className="h-[36px] w-[160px] sm:w-[220px] md:w-[260px] animate-pulse rounded-xl border border-white/20 bg-white/5" />
+      <div className="h-[36px] w-[36px] animate-pulse rounded-xl bg-white/10" />
+    </div>
+  );
+}
 
 export default function TopNav() {
   const pathname = usePathname();
@@ -42,7 +52,9 @@ export default function TopNav() {
           </ul>
 
           <div className="ml-auto">
-            <SearchBox variant="nav" />
+            <Suspense fallback={<SearchBoxFallback />}>
+              <SearchBox variant="nav" />
+            </Suspense>
           </div>
         </div>
       </div>
