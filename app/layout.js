@@ -4,7 +4,10 @@ import TopNav from "../components/TopNav";
 
 export const metadata = {
   title: "인사3분",
-  description: "바쁜 직장인들의 시간을 낭비하지 않겠습니다! 노동법, 연차 휴가, 복리후생, 연봉협상 등 직장인이라면 알아야 할 권리를 3분 내로 핵심만 설명합니다."
+  description: "바쁜 직장인들의 시간을 낭비하지 않겠습니다! 노동법, 연차 휴가, 복리후생, 연봉협상 등 직장인이라면 알아야 할 권리를 3분 내로 핵심만 설명합니다.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 const themeInitScript = `

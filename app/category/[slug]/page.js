@@ -37,7 +37,7 @@ export default function CategoryPage({ params }) {
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
-          <PostCard key={post.slug} post={post} />
+          <PostCard key={post.slug} post={post} variant="imageOnly" />
         ))}
       </section>
     </div>
