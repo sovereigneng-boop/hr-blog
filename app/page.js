@@ -17,7 +17,7 @@ export default function HomePage() {
           <section key={category.slug} className="space-y-4">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div className="space-y-1">
-                <h2 className="text-[1.375rem] font-semibold tracking-tight text-[#1B2A4A] dark:text-slate-100">
+                <h2 className="font-heading text-[1.375rem] font-semibold tracking-tight text-[#1B2A4A] dark:text-slate-100">
                   {category.mainHeading ?? category.label}
                 </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -32,7 +32,7 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
               {latest.map((post) => (
                 <PostCard key={post.slug} post={post} variant="imageOnly" />
               ))}

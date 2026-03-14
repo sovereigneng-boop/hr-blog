@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ['"ELAND Choice B"', "system-ui", "sans-serif"],
+      },
       colors: {
         brand: {
           50: "#eef6fc",

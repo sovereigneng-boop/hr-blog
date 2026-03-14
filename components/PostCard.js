@@ -12,7 +12,7 @@ export default function PostCard({ post, variant = "default" }) {
       <Link href={`/posts/${post.slug}`} className="group block">
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
           <div className={isImageOnly ? "h-full" : "grid h-full grid-rows-[2fr_1fr]"}>
-            <div className="relative h-52 sm:h-60 md:h-64 overflow-hidden bg-slate-100 dark:bg-slate-900">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 dark:bg-slate-900">
               <img
                 src={thumbnail}
                 alt=""

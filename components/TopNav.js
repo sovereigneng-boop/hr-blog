@@ -8,7 +8,7 @@ import SearchBox from "./SearchBox";
 
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
-  ...CATEGORIES.map((c) => ({ href: `/category/${c.slug}`, label: c.label }))
+  ...CATEGORIES.map((c) => ({ href: `/category/${c.slug}`, label: c.displayLabel ?? c.label }))
 ];
 
 function SearchBoxFallback() {
@@ -22,25 +22,29 @@ function SearchBoxFallback() {
 
 export default function TopNav() {
   const pathname = usePathname();
+  const isPostDetail = pathname?.startsWith("/posts/");
+  const isHome = pathname === "/";
 
   return (
     <nav
-      className="sticky top-[5.25rem] z-40 border-b border-white/10 bg-[#1A3A5C] shadow-sm"
+      className={`z-40 border-b border-white/10 bg-[#1A3A5C] shadow-sm sm:sticky ${
+        isHome || isPostDetail ? "sm:top-0" : "sm:top-[5.25rem]"
+      }`}
       aria-label="카테고리"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center gap-3 py-2">
-          <ul className="flex flex-wrap gap-0.5">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 py-1.5 sm:py-2">
+          <ul className="flex flex-nowrap sm:flex-wrap gap-0 sm:gap-0.5">
             {NAV_ITEMS.map(({ href, label }) => {
               const isActive =
                 href === "/"
                   ? pathname === "/"
                   : pathname.startsWith(href);
               return (
-                <li key={href}>
+                <li key={href} className="shrink-0">
                   <Link
                     href={href}
-                    className={`block rounded-lg px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-[#2E6DB4] ${
+                    className={`block rounded-md sm:rounded-lg px-1.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white transition-colors hover:bg-[#2E6DB4] whitespace-nowrap ${
                       isActive ? "bg-[#2E6DB4]" : ""
                     }`}
                   >

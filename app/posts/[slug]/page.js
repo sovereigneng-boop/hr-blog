@@ -41,7 +41,7 @@ export default async function PostPage({ params }) {
             <span className="inline-flex items-center rounded-full bg-brand-500 text-white px-2 py-0.5 text-xs font-medium">
               {post.category}
             </span>
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl dark:text-slate-50">
+            <h1 className="font-heading text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl dark:text-slate-50">
               {post.title}
             </h1>
           </div>
