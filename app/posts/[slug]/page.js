@@ -1,11 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "../../../lib/posts";
+import { getAllPosts, getPostBySlug } from "../../../lib/posts-kv";
 
-export function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }) {
   const post = await getPostBySlug(params.slug);
@@ -69,4 +66,3 @@ export default async function PostPage({ params }) {
     </article>
   );
 }
-

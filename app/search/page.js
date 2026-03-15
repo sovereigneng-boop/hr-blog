@@ -1,5 +1,7 @@
 import PostCard from "../../components/PostCard";
-import { getAllPosts } from "../../lib/posts";
+import { getAllPosts } from "../../lib/posts-kv";
+
+export const dynamic = "force-dynamic";
 
 function normalize(str) {
   return (str ?? "").toString().trim().toLowerCase();
@@ -19,10 +21,10 @@ export function generateMetadata({ searchParams }) {
   };
 }
 
-export default function SearchPage({ searchParams }) {
+export default async function SearchPage({ searchParams }) {
   const qRaw = (searchParams?.q ?? "").toString();
   const q = normalize(qRaw);
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
 
   const results = q
     ? posts.filter((p) => {
@@ -41,7 +43,7 @@ export default function SearchPage({ searchParams }) {
         </h1>
         {q ? (
           <p className="text-sm text-slate-600 dark:text-slate-300">
-            “{qRaw}” 검색 결과 {results.length}개
+            "{qRaw}" 검색 결과 {results.length}개
           </p>
         ) : (
           <p className="text-sm text-slate-600 dark:text-slate-300">
@@ -60,4 +62,3 @@ export default function SearchPage({ searchParams }) {
     </div>
   );
 }
-

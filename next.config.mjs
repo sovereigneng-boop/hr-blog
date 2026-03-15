@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    serverComponentsExternalPackages: ["@vercel/blob"],
+    serverComponentsExternalPackages: ["@vercel/blob", "@vercel/kv"],
   },
 };
 

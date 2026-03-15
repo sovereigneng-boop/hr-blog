@@ -1,10 +1,12 @@
 import Link from "next/link";
 import PostCard from "../components/PostCard";
 import { CATEGORIES } from "../lib/categories";
-import { getAllPosts } from "../lib/posts";
+import { getAllPosts } from "../lib/posts-kv";
 
-export default function HomePage() {
-  const posts = getAllPosts();
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const posts = await getAllPosts();
 
   return (
     <div className="space-y-12">
@@ -43,4 +45,3 @@ export default function HomePage() {
     </div>
   );
 }
-

@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import PostCard from "../../../components/PostCard";
 import { CATEGORIES, getCategoryBySlug } from "../../../lib/categories";
-import { getAllPosts } from "../../../lib/posts";
+import { getAllPosts } from "../../../lib/posts-kv";
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return CATEGORIES.map((c) => ({ slug: c.slug }));
@@ -18,11 +20,12 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function CategoryPage({ params }) {
+export default async function CategoryPage({ params }) {
   const category = getCategoryBySlug(params.slug);
   if (!category) notFound();
 
-  const posts = getAllPosts().filter((p) => p.category === category.label);
+  const allPosts = await getAllPosts();
+  const posts = allPosts.filter((p) => p.category === category.label);
 
   return (
     <div className="space-y-6">
@@ -43,4 +46,3 @@ export default function CategoryPage({ params }) {
     </div>
   );
 }
-

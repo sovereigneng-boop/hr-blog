@@ -1,11 +1,7 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import { isAuthenticated } from "../../../../../lib/admin-auth";
 import { CATEGORIES } from "../../../../../lib/categories";
-
-const postsDir = path.join(process.cwd(), "posts");
+import { getPostRaw, savePost, deletePost } from "../../../../../lib/posts-kv";
 
 async function requireAuth() {
   if (!(await isAuthenticated())) {
@@ -18,21 +14,20 @@ export async function GET(request, { params }) {
   const err = await requireAuth();
   if (err) return err;
 
-  const filePath = path.join(postsDir, `${params.slug}.md`);
-  if (!fs.existsSync(filePath)) {
+  const data = await getPostRaw(params.slug);
+  if (!data) {
     return NextResponse.json({ error: "글을 찾을 수 없습니다." }, { status: 404 });
   }
 
-  const { data, content } = matter(fs.readFileSync(filePath, "utf8"));
   return NextResponse.json({
-    slug: params.slug,
+    slug: data.slug,
     title: data.title,
     date: data.date,
     category: data.category,
     summary: data.summary || "",
     thumbnail: data.thumbnail || "",
     tags: data.tags || [],
-    content: content.trim(),
+    content: data.content || "",
   });
 }
 
@@ -42,7 +37,7 @@ export async function PUT(request, { params }) {
 
   try {
     const { title, category, summary, thumbnail, content, date, tags } = await request.json();
-    const oldSlug = params.slug;
+    const slug = params.slug;
 
     if (!title || !category) {
       return NextResponse.json({ error: "제목과 카테고리는 필수입니다." }, { status: 400 });
@@ -54,21 +49,18 @@ export async function PUT(request, { params }) {
     }
 
     const d = date || new Date().toISOString().slice(0, 10);
-    const tagsLine = tags && tags.length > 0 ? `\ntags: [${tags.map((t) => `"${esc(t)}"`).join(", ")}]` : "";
 
-    const md = `---
-title: "${esc(title)}"
-date: "${d}"
-category: "${cat.label}"
-summary: "${esc(summary || "")}"${thumbnail ? `\nthumbnail: "${thumbnail}"` : ""}${tagsLine}
----
+    await savePost(slug, {
+      title,
+      date: d,
+      category: cat.label,
+      summary: summary || "",
+      thumbnail: thumbnail || "",
+      tags: tags || [],
+      content: content || "",
+    });
 
-${content || ""}
-`;
-
-    const filePath = path.join(postsDir, `${oldSlug}.md`);
-    fs.writeFileSync(filePath, md, "utf8");
-    return NextResponse.json({ success: true, slug: oldSlug });
+    return NextResponse.json({ success: true, slug });
   } catch (e) {
     return NextResponse.json({ error: e.message || "수정 실패" }, { status: 500 });
   }
@@ -78,14 +70,11 @@ export async function DELETE(request, { params }) {
   const err = await requireAuth();
   if (err) return err;
 
-  const filePath = path.join(postsDir, `${params.slug}.md`);
-  if (!fs.existsSync(filePath)) {
+  const data = await getPostRaw(params.slug);
+  if (!data) {
     return NextResponse.json({ error: "글을 찾을 수 없습니다." }, { status: 404 });
   }
-  fs.unlinkSync(filePath);
-  return NextResponse.json({ success: true });
-}
 
-function esc(str) {
-  return (str || "").replace(/"/g, '\\"');
+  await deletePost(params.slug);
+  return NextResponse.json({ success: true });
 }
