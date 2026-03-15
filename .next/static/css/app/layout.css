@@ -1747,6 +1747,13 @@ h4 {
 .prose-compact {
   line-height: 1.375;
 }
+
+/* H2 스타일 — 에디터·글 페이지 공통 */
+.prose-compact h2 {
+  background-color: #E8F1FF;
+  border-bottom: 2px solid #1E40AF;
+  padding: 0.5em 0.75em;
+}
 .dark\:prose-invert:is(.dark *) {
   --tw-prose-body: var(--tw-prose-invert-body);
   --tw-prose-headings: var(--tw-prose-invert-headings);
