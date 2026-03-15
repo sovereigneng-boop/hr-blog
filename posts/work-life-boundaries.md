@@ -17,7 +17,7 @@ thumbnail: "https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=fo
 ㅇ러ㅏ어라  
 아러ㅏ어라어
 
-<img src="/uploads/img-1773552812253.jpg" alt="" width="183px" />
+<a href="https://naver.com"><img src="/uploads/img-1773552812253.jpg" alt="" width="183px" /></a>
 
 ## 1) ‘긴급’의 정의를 합의하기
 

@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { put } from "@vercel/blob";
 import { isAuthenticated } from "../../../../lib/admin-auth";
-
-const uploadDir = path.join(process.cwd(), "public", "uploads");
 
 export async function POST(request) {
   if (!(await isAuthenticated())) {
@@ -17,15 +14,15 @@ export async function POST(request) {
       return NextResponse.json({ error: "파일이 없습니다." }, { status: 400 });
     }
 
-    const ext = path.extname(file.name || "") || ".jpg";
-    const name = `img-${Date.now()}${ext}`;
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    const buffer = Buffer.from(await file.arrayBuffer());
-    fs.writeFileSync(path.join(uploadDir, name), buffer);
+    const ext = (file.name || "").split(".").pop() || "jpg";
+    const filename = `blog/img-${Date.now()}.${ext}`;
 
-    return NextResponse.json({ url: `/uploads/${name}` });
+    const blob = await put(filename, file, {
+      access: "public",
+      addRandomSuffix: false,
+    });
+
+    return NextResponse.json({ url: blob.url });
   } catch (e) {
     return NextResponse.json({ error: e.message || "업로드 실패" }, { status: 500 });
   }
