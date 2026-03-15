@@ -53,7 +53,6 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: "올바른 카테고리를 선택해 주세요." }, { status: 400 });
     }
 
-    const slug = slugify(title);
     const d = date || new Date().toISOString().slice(0, 10);
     const tagsLine = tags && tags.length > 0 ? `\ntags: [${tags.map((t) => `"${esc(t)}"`).join(", ")}]` : "";
 
@@ -67,12 +66,9 @@ summary: "${esc(summary || "")}"${thumbnail ? `\nthumbnail: "${thumbnail}"` : ""
 ${content || ""}
 `;
 
-    if (oldSlug !== slug) {
-      const oldPath = path.join(postsDir, `${oldSlug}.md`);
-      if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-    }
-    fs.writeFileSync(path.join(postsDir, `${slug}.md`), md, "utf8");
-    return NextResponse.json({ success: true, slug });
+    const filePath = path.join(postsDir, `${oldSlug}.md`);
+    fs.writeFileSync(filePath, md, "utf8");
+    return NextResponse.json({ success: true, slug: oldSlug });
   } catch (e) {
     return NextResponse.json({ error: e.message || "수정 실패" }, { status: 500 });
   }
@@ -88,13 +84,6 @@ export async function DELETE(request, { params }) {
   }
   fs.unlinkSync(filePath);
   return NextResponse.json({ success: true });
-}
-
-function slugify(text) {
-  const base = (text || "").trim().toLowerCase()
-    .replace(/\s+/g, "-").replace(/[^\w가-힣\-]/g, "")
-    .replace(/-+/g, "-").replace(/^-|-$/g, "");
-  return base || `post-${Date.now()}`;
 }
 
 function esc(str) {

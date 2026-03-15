@@ -22,8 +22,11 @@ function SearchBoxFallback() {
 
 export default function TopNav() {
   const pathname = usePathname();
+  const isAdmin = pathname?.startsWith("/admin");
   const isPostDetail = pathname?.startsWith("/posts/");
   const isHome = pathname === "/";
+
+  if (isAdmin) return null;
 
   return (
     <nav

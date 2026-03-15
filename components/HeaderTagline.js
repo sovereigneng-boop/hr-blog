@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 export default function HeaderTagline() {
   const pathname = usePathname();
   const isPostDetail = pathname?.startsWith("/posts/");
+  const isAdmin = pathname?.startsWith("/admin");
 
-  if (isPostDetail) {
+  if (isPostDetail || isAdmin) {
     return null;
   }
 

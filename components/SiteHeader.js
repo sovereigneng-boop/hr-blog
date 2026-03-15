@@ -8,11 +8,18 @@ export default function SiteHeader() {
   const pathname = usePathname();
   const isPostDetail = pathname?.startsWith("/posts/");
   const isHome = pathname === "/";
+  const isAdmin = pathname?.startsWith("/admin");
+
+  const titleClass = isAdmin
+    ? "site-title-admin"
+    : isPostDetail
+      ? "site-title-compact"
+      : "site-title";
 
   return (
     <header
       className={`z-50 border-b border-white/10 bg-[#0A2540] shadow-sm ${
-        isHome || isPostDetail ? "relative" : "sticky top-0"
+        isHome || isPostDetail || isAdmin ? "relative" : "sticky top-0"
       }`}
     >
       <div
@@ -21,11 +28,7 @@ export default function SiteHeader() {
         }`}
       >
         <div className="flex flex-col gap-1">
-          <span
-            className={`tracking-tight text-white ${
-              isPostDetail ? "site-title-compact" : "site-title"
-            }`}
-          >
+          <span className={`tracking-tight text-white ${titleClass}`}>
             인사3분
           </span>
           <HeaderTagline />

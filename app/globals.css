@@ -43,6 +43,13 @@ body {
   line-height: 1.1;
 }
 
+.site-title-admin {
+  font-family: "ELAND Nice M", system-ui, sans-serif;
+  font-size: 2.04rem;
+  font-weight: normal;
+  line-height: 1.1;
+}
+
 h1,
 h2 {
   font-family: "ELAND Choice B", system-ui, sans-serif;
