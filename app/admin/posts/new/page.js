@@ -13,8 +13,6 @@ export default function NewPostPage() {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(CATEGORIES[0].label);
-  const [summary, setSummary] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
   const [htmlContent, setHtmlContent] = useState("");
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
@@ -54,8 +52,6 @@ export default function NewPostPage() {
       body: JSON.stringify({
         title,
         category,
-        summary,
-        thumbnail: thumbnail || undefined,
         content: markdown,
         tags: tags.length > 0 ? tags : undefined,
       }),
@@ -84,25 +80,12 @@ export default function NewPostPage() {
             className="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">카테고리</label>
-            <select value={category} onChange={(e) => setCategory(e.target.value)}
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100">
-              {CATEGORIES.map((c) => <option key={c.slug} value={c.label}>{c.displayLabel ?? c.label}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">썸네일 URL (선택)</label>
-            <input type="url" value={thumbnail} onChange={(e) => setThumbnail(e.target.value)} placeholder="https://..."
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100" />
-          </div>
-        </div>
-
         <div>
-          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">요약</label>
-          <textarea value={summary} onChange={(e) => setSummary(e.target.value)} rows={2} placeholder="글 요약 (선택)"
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100" />
+          <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">카테고리</label>
+          <select value={category} onChange={(e) => setCategory(e.target.value)}
+            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100">
+            {CATEGORIES.map((c) => <option key={c.slug} value={c.label}>{c.displayLabel ?? c.label}</option>)}
+          </select>
         </div>
 
         <div>

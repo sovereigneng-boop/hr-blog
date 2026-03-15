@@ -10,6 +10,14 @@ async function requireAuth() {
   return null;
 }
 
+function getFirstImageUrlFromContent(content) {
+  if (!content || typeof content !== "string") return null;
+  const imgTag = content.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (imgTag) return imgTag[1];
+  const mdImg = content.match(/!\[[^\]]*\]\(([^)]+)\)/);
+  return mdImg ? mdImg[1] : null;
+}
+
 export async function GET() {
   const err = await requireAuth();
   if (err) return err;
@@ -23,7 +31,7 @@ export async function POST(request) {
   if (err) return err;
 
   try {
-    const { title, category, summary, thumbnail, content, tags } = await request.json();
+    const { title, category, content, tags } = await request.json();
 
     if (!title || !category) {
       return NextResponse.json({ error: "제목과 카테고리는 필수입니다." }, { status: 400 });
@@ -36,13 +44,14 @@ export async function POST(request) {
 
     const slug = slugify(title);
     const date = new Date().toISOString().slice(0, 10);
+    const thumbnail = getFirstImageUrlFromContent(content);
 
     await savePost(slug, {
       title,
       date,
       category: cat.label,
-      summary: summary || "",
-      thumbnail: thumbnail || "",
+      summary: "",
+      thumbnail: thumbnail ?? null,
       tags: tags || [],
       content: content || "",
     });

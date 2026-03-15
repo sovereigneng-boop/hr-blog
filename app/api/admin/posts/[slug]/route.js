@@ -10,6 +10,14 @@ async function requireAuth() {
   return null;
 }
 
+function getFirstImageUrlFromContent(content) {
+  if (!content || typeof content !== "string") return null;
+  const imgTag = content.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (imgTag) return imgTag[1];
+  const mdImg = content.match(/!\[[^\]]*\]\(([^)]+)\)/);
+  return mdImg ? mdImg[1] : null;
+}
+
 export async function GET(request, { params }) {
   const err = await requireAuth();
   if (err) return err;
@@ -36,7 +44,7 @@ export async function PUT(request, { params }) {
   if (err) return err;
 
   try {
-    const { title, category, summary, thumbnail, content, date, tags } = await request.json();
+    const { title, category, content, date, tags } = await request.json();
     const slug = params.slug;
 
     if (!title || !category) {
@@ -49,13 +57,14 @@ export async function PUT(request, { params }) {
     }
 
     const d = date || new Date().toISOString().slice(0, 10);
+    const thumbnail = getFirstImageUrlFromContent(content);
 
     await savePost(slug, {
       title,
       date: d,
       category: cat.label,
-      summary: summary || "",
-      thumbnail: thumbnail || "",
+      summary: "",
+      thumbnail: thumbnail ?? null,
       tags: tags || [],
       content: content || "",
     });

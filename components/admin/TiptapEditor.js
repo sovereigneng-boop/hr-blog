@@ -13,10 +13,8 @@ import { createPortal } from "react-dom";
 
 const FONT_SIZES = ["12px", "14px", "16px", "18px", "20px", "24px", "28px", "32px"];
 const COLORS = [
-  "#000000", "#434343", "#666666", "#999999",
-  "#DC2626", "#EA580C", "#D97706", "#65A30D",
-  "#059669", "#0891B2", "#2563EB", "#7C3AED",
-  "#C026D3", "#E11D48",
+  "#000000", "#FFFFFF", "#FF0000", "#FF6600", "#FFFF00",
+  "#008000", "#0000FF", "#000080", "#800080",
 ];
 
 const ResizableImage = Image.extend({
@@ -356,6 +354,7 @@ function LinkInputModal({ isOpen, initialUrl, onConfirm, onCancel }) {
 function Toolbar({ editor, onLinkClick }) {
   const [showColors, setShowColors] = useState(false);
   const [showFontSize, setShowFontSize] = useState(false);
+  const [colorInputValue, setColorInputValue] = useState("");
   const colorRef = useRef(null);
   const fontRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -495,34 +494,60 @@ function Toolbar({ editor, onLinkClick }) {
           title="글자 색상"
         >
           <span className="flex items-center gap-1">
-            A<span className="inline-block h-2 w-4 rounded" style={{ background: editor.getAttributes("textStyle").color || "#000" }} />
+            A<span className="inline-block h-2 w-4 rounded border border-slate-300" style={{ background: editor.getAttributes("textStyle").color || "#000" }} />
           </span>
         </button>
         {showColors && (
-          <div className="absolute top-full left-0 z-50 mt-1 grid grid-cols-7 gap-1 rounded-lg border border-slate-200 bg-white p-2 shadow-lg dark:border-slate-600 dark:bg-slate-700">
-            {COLORS.map((c) => (
+          <div className="absolute top-full left-0 z-50 mt-1 w-56 rounded-lg border border-slate-200 bg-white p-4 shadow-lg dark:border-slate-600 dark:bg-slate-700">
+            <div className="grid grid-cols-3 gap-2 mb-3">
+              {COLORS.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => {
+                    editor.chain().focus().setColor(c).run();
+                    setShowColors(false);
+                  }}
+                  className="h-9 w-9 rounded-md border-2 border-slate-300 dark:border-slate-500 hover:ring-2 hover:ring-slate-400 dark:hover:ring-slate-500 shrink-0"
+                  style={{ background: c }}
+                  title={c}
+                />
+              ))}
+            </div>
+            <div className="flex gap-2 items-center border-t border-slate-200 dark:border-slate-600 pt-3">
+              <input
+                type="text"
+                value={colorInputValue}
+                onChange={(e) => setColorInputValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    const hex = (colorInputValue.trim().startsWith("#") ? colorInputValue.trim() : "#" + colorInputValue.trim()).toUpperCase();
+                    if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+                      editor.chain().focus().setColor(hex).run();
+                      setShowColors(false);
+                      setColorInputValue("");
+                    }
+                  }
+                }}
+                placeholder="#1B2A4A"
+                className="flex-1 min-w-0 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-2 py-1.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
               <button
-                key={c}
                 type="button"
                 onClick={() => {
-                  editor.chain().focus().setColor(c).run();
-                  setShowColors(false);
+                  const hex = (colorInputValue.trim().startsWith("#") ? colorInputValue.trim() : "#" + colorInputValue.trim()).toUpperCase();
+                  if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+                    editor.chain().focus().setColor(hex).run();
+                    setShowColors(false);
+                    setColorInputValue("");
+                  }
                 }}
-                className="h-5 w-5 rounded border border-slate-300 dark:border-slate-500"
-                style={{ background: c }}
-                title={c}
-              />
-            ))}
-            <button
-              type="button"
-              onClick={() => {
-                editor.chain().focus().unsetColor().run();
-                setShowColors(false);
-              }}
-              className="col-span-7 mt-1 rounded px-2 py-0.5 text-xs text-red-600 hover:bg-slate-100 dark:hover:bg-slate-600"
-            >
-              색상 초기화
-            </button>
+                className="shrink-0 rounded px-2.5 py-1.5 text-xs font-medium bg-slate-200 text-slate-800 hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-200 dark:hover:bg-slate-500"
+              >
+                적용
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -606,7 +631,7 @@ export default function TiptapEditor({ content, onChange, className }) {
     },
     editorProps: {
       attributes: {
-        class: "prose prose-slate dark:prose-invert max-w-none focus:outline-none min-h-[300px] px-4 py-3",
+        class: "prose prose-compact prose-slate dark:prose-invert max-w-none focus:outline-none min-h-[300px] px-4 py-3",
       },
       handleClick(view, pos, event) {
         const target = event.target instanceof HTMLElement ? event.target : event.target.parentElement;

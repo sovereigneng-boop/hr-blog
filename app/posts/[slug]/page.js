@@ -60,7 +60,7 @@ export default async function PostPage({ params }) {
       ) : null}
 
       <div
-        className="prose prose-slate max-w-none text-sm sm:text-base dark:prose-invert prose-a:text-brand-700 dark:prose-a:text-brand-300"
+        className="prose prose-compact prose-slate max-w-none text-sm sm:text-base dark:prose-invert prose-a:text-brand-700 dark:prose-a:text-brand-300"
         dangerouslySetInnerHTML={{ __html: post.contentHtml }}
       />
     </article>

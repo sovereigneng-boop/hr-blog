@@ -65,3 +65,18 @@ h4 {
   @apply transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-md;
 }
 
+/* 단락(p)·줄바꿈(br) 간격 절반 — 에디터·글 페이지 공통 */
+.prose-compact p {
+  margin-top: 0.525em;
+  margin-bottom: 0.525em;
+}
+.prose-compact p:first-child {
+  margin-top: 0;
+}
+.prose-compact p:last-child {
+  margin-bottom: 0;
+}
+.prose-compact {
+  line-height: 1.375;
+}
+
