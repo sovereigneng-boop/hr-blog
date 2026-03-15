@@ -1,7 +1,16 @@
 {
-  "/category/[slug]/page": "app/category/[slug]/page.js",
+  "/_not-found": "app/_not-found.js",
+  "/api/admin/login/route": "app/api/admin/login/route.js",
+  "/api/admin/auth/route": "app/api/admin/auth/route.js",
+  "/api/admin/posts/[slug]/route": "app/api/admin/posts/[slug]/route.js",
+  "/api/admin/posts/route": "app/api/admin/posts/route.js",
+  "/api/admin/upload/route": "app/api/admin/upload/route.js",
   "/page": "app/page.js",
+  "/search/page": "app/search/page.js",
   "/posts/[slug]/page": "app/posts/[slug]/page.js",
+  "/category/[slug]/page": "app/category/[slug]/page.js",
   "/admin/posts/edit/[slug]/page": "app/admin/posts/edit/[slug]/page.js",
-  "/admin/page": "app/admin/page.js"
+  "/admin/login/page": "app/admin/login/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/posts/new/page": "app/admin/posts/new/page.js"
 }
