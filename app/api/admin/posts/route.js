@@ -63,8 +63,12 @@ export async function POST(request) {
 }
 
 function slugify(text) {
-  const base = (text || "").trim().toLowerCase()
-    .replace(/\s+/g, "-").replace(/[^\w가-힣\-]/g, "")
-    .replace(/-+/g, "-").replace(/^-|-$/g, "");
-  return base || `post-${Date.now()}`;
+  const base = (text || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9\-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+  return base.length >= 2 ? base : `post-${Date.now()}`;
 }
